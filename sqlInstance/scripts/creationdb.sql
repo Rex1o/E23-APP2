@@ -1,32 +1,28 @@
 
 CREATE TABLE Faculte
 (
-  nom VARCHAR NOT NULL,
-  fac_id INT NOT NULL,
-  PRIMARY KEY (fac_id)
+  fac_id SERIAL PRIMARY KEY ,
+  nom VARCHAR NOT NULL
 );
 
 CREATE TABLE Departement
 (
-  dep_id INT NOT NULL,
-  nom INT NOT NULL,
+  dep_id SERIAL PRIMARY KEY,
+  nom VARCHAR NOT NULL,
   fac_id INT NOT NULL,
-  PRIMARY KEY (dep_id),
   FOREIGN KEY (fac_id) REFERENCES Faculte(fac_id)
 );
 
-CREATE TABLE Status
+CREATE TABLE Statut
 (
-  status_id INT NOT NULL,
-  description VARCHAR NOT NULL,
-  PRIMARY KEY (status_id)
+  statut_id SERIAL PRIMARY KEY,
+  description VARCHAR NOT NULL
 );
 
 CREATE TABLE Campus
 (
-  camp_id INT NOT NULL,
-  nom VARCHAR NOT NULL,
-  PRIMARY KEY (camp_id)
+  camp_id SERIAL PRIMARY KEY,
+  nom VARCHAR NOT NULL
 );
 
 CREATE TABLE Pavillon
@@ -34,38 +30,38 @@ CREATE TABLE Pavillon
   pav_id CHAR(3) NOT NULL,
   nom VARCHAR NOT NULL,
   camp_id INT NOT NULL,
+  fac_id INT,
   PRIMARY KEY (pav_id),
-  FOREIGN KEY (camp_id) REFERENCES Campus(camp_id)
+  FOREIGN KEY (camp_id) REFERENCES Campus(camp_id),
+  FOREIGN KEY (fac_id) REFERENCES Faculte(fac_id)
 );
 
 CREATE TABLE Fonction
 (
-  fonc_id INT NOT NULL,
+  fonc_id CHAR(4) NOT NULL,
   description VARCHAR NOT NULL,
   PRIMARY KEY (fonc_id)
 );
 
 CREATE TABLE Caracteristique
 (
-  carac_id INT NOT NULL,
-  desciption VARCHAR NOT NULL,
-  PRIMARY KEY (carac_id)
+  carac_id SERIAL PRIMARY KEY ,
+  desciption VARCHAR NOT NULL
 );
 
 CREATE TABLE Categorie
 (
-  cat_id INT NOT NULL,
-  description INT NOT NULL,
-  PRIMARY KEY (cat_id)
+  cat_id SERIAL PRIMARY KEY,
+  description VARCHAR NOT NULL
 );
 
 CREATE TABLE Membre
 (
   cip CHAR(8) NOT NULL,
-  status_id INT NOT NULL,
+  statut_id INT NOT NULL,
   dep_id INT NOT NULL,
   PRIMARY KEY (cip),
-  FOREIGN KEY (status_id) REFERENCES Status(status_id),
+  FOREIGN KEY (statut_id) REFERENCES Statut(statut_id),
   FOREIGN KEY (dep_id) REFERENCES Departement(dep_id)
 );
 
@@ -74,7 +70,7 @@ CREATE TABLE Local
   numero_local INT NOT NULL,
   cat_id INT NOT NULL,
   pav_id CHAR(3) NOT NULL,
-  fonc_id INT NOT NULL,
+  fonc_id CHAR(4) NOT NULL,
   FOREIGN KEY (cat_id) REFERENCES Categorie(cat_id),
   FOREIGN KEY (pav_id) REFERENCES Pavillon(pav_id),
   FOREIGN KEY (fonc_id) REFERENCES Fonction(fonc_id),
