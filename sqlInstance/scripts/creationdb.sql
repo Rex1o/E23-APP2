@@ -13,10 +13,18 @@ CREATE TABLE Departement
   FOREIGN KEY (fac_id) REFERENCES Faculte(fac_id)
 );
 
+CREATE TABLE Previlege
+(
+  previ_id SERIAL PRIMARY KEY,
+  description VARCHAR NOT NULL
+);
+
 CREATE TABLE Statut
 (
   statut_id SERIAL PRIMARY KEY,
-  description VARCHAR NOT NULL
+  description VARCHAR NOT NULL,
+  previ_id INT NOT NULL,
+  FOREIGN KEY (previ_id) REFERENCES Previlege(previ_id)
 );
 
 CREATE TABLE Campus
@@ -52,7 +60,9 @@ CREATE TABLE Caracteristique
 CREATE TABLE Categorie
 (
   cat_id SERIAL PRIMARY KEY,
-  description VARCHAR NOT NULL
+  description VARCHAR NOT NULL,
+  previ_id INT NOT NULL,
+  FOREIGN KEY (previ_id) REFERENCES Previlege(previ_id)
 );
 
 CREATE TABLE Membre

@@ -104,11 +104,30 @@ VALUES (0 , 'Connexion à Internet')
 ,(43, 'Local barré')
 ,(44, 'Prise réseau');
 
---Creation catégories
-INSERT INTO categorie(description)
+--Creation des prévilèges
+INSERT INTO previlege(description)
 VALUES ('Peut réserver plus de 24 heures')
 ,('Peut seulement voir les réservations mais pas en créer')
 ,('Peut effacer les réservations d’un autre usager');
+
+
+--Creation catégories
+INSERT INTO categorie(description)
+VALUES ('GEGI - Salle de tutorat')
+,('GEGI - Salle de projet')
+,('GEGI - Laboratoire')
+,('GEGI - Laboratoire spécialisé')
+,('GEGI - Salle de réunion')
+,('Génie - Amphithéatre (40 places et -)')
+,('Génie - Amphithéatre (81 places et +)')
+,('Génie - Laboratoire informatique')
+,('GCGB - Laboratoire informatique')
+,('Cubicule - 3035')
+,('Cubicule - 3041')
+,('Cubicule - 4103')
+,('Cubicule - 4113')
+,('Cubicule - 4115')
+,('Cubicule - Bureau Chargé de cours');
 
 
 --Creation des départements
