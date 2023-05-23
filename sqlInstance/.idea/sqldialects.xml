@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/scripts/creationdb.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/scripts/proc.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/scripts/seed.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/scripts/triggers.sql" dialect="PostgreSQL" />
     <file url="PROJECT" dialect="PostgreSQL" />
   </component>
 </project>
