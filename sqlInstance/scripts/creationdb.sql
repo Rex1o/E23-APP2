@@ -107,3 +107,11 @@ CREATE TABLE Reservation
   FOREIGN KEY (cip) REFERENCES Membre(cip),
   FOREIGN KEY (pav_id, numero_local) REFERENCES Local(pav_id, numero_local)
 );
+
+CREATE TABLE LogReservation
+(
+    log_id SERIAL PRIMARY KEY,
+    res_id INT NOT NULL,
+    action VARCHAR(16),
+    time DATE
+);
