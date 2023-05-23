@@ -168,7 +168,11 @@ VALUES
 ,(4023, 7, 'C1', '0372', NULL, NULL)
 ,(5001, 4, 'C1', '0372', NULL, NULL)
 ,(5006, 7, 'C1', '0372', NULL, NULL)
-,(3016, 1, 'D7', '0372', NULL, NULL);
+,(3016, 1, 'D7', '0372', NULL, NULL)
+,(3017, 1, 'D7', '0372', NULL, NULL)
+,(3018, 1, 'D7', '0372', 3017, 'D7')
+,(3019, 1, 'D7', '0372', 3017, 'D7')
+,(30120, 1, 'D7', '0372', 3017, 'D7');
 
 INSERT INTO reservation(debut, fin, commentaire, cip, numero_local, pav_id)
 VALUES
@@ -184,7 +188,14 @@ VALUES
 ,(make_timestamp(2023, 5, 23, 12, 30, 0), make_timestamp(2023, 5, 23, 16, 30, 0), 'France Jacques ING260-', 'vhbj6237', 5001, 'C1')
 ,(make_timestamp(2023, 5, 23, 8, 30, 0), make_timestamp(2023, 5, 23, 13, 30, 0), 'Faculte Genie activites pedagogiques de lhiver - MEC002', 'vhbj6237', 5006, 'C1')
 ,(make_timestamp(2023, 5, 23, 9, 30, 0), make_timestamp(2023, 5, 23, 12, 30, 0), 'Faculte Genie session 5 GCI320-01 - Magistral', 'vhbj6237', 3016, 'D7')
-,(make_timestamp(2023, 5, 23, 12, 30, 0), make_timestamp(2023, 5, 23, 13, 30, 0), 'Faculte Genie session 5 GCI002-01 - Magistral', 'vhbj6237', 3016, 'D7');
+,(make_timestamp(2023, 5, 23, 12, 30, 0), make_timestamp(2023, 5, 23, 13, 30, 0), 'dawbhjdv jhawbndijwajnd','vhbj6237', 3017, 'D7');
 
 
+INSERT INTO reservation(debut, fin, commentaire, cip, numero_local, pav_id)
+VALUES
+    (make_timestamp(2023, 5, 23, 12, 30, 0), make_timestamp(2023, 5, 23, 13, 30, 0), 'fonctionne pas yo','vhbj6237', 3017, 'D7');
+
+INSERT INTO reservation(debut, fin, commentaire, cip, numero_local, pav_id)
+VALUES
+    (make_timestamp(2023, 5, 23, 12, 30, 0), make_timestamp(2023, 5, 23, 13, 30, 0), 'fonDAWDAW yo','vhbj6237', 30120, 'D7');
 
