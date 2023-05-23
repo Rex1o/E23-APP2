@@ -105,11 +105,17 @@ VALUES (0 , 'Connexion à Internet')
 ,(44, 'Prise réseau');
 
 --Creation des prévilèges
-INSERT INTO previlege(description)
+INSERT INTO privilege(description)
 VALUES ('Peut réserver plus de 24 heures')
 ,('Peut seulement voir les réservations mais pas en créer')
 ,('Peut effacer les réservations d’un autre usager');
 
+--Creation statu
+INSERT INTO statut(description, privi_id)
+VALUES ('Étudiants',null)
+     ,('Enseignants',1)
+     ,('Personnel de soutien',2)
+     ,('Administrateurs',3);
 
 --Creation catégories
 INSERT INTO categorie(description)
@@ -141,9 +147,3 @@ VALUES ('Génie électrique et Génie informatique',4)
 ,('Informatique',7)
 ,('Mathématiques',7)
 ,('Physique',7);
-
-INSERT INTO statut(description)
-VALUES ('Étudiants')
-,('Enseignants')
-,('Personnel de soutien')
-,('Administrateurs');

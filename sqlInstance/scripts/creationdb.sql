@@ -13,9 +13,9 @@ CREATE TABLE Departement
   FOREIGN KEY (fac_id) REFERENCES Faculte(fac_id)
 );
 
-CREATE TABLE Previlege
+CREATE TABLE Privilege
 (
-  previ_id SERIAL PRIMARY KEY,
+  privi_id SERIAL PRIMARY KEY,
   description VARCHAR NOT NULL
 );
 
@@ -23,8 +23,8 @@ CREATE TABLE Statut
 (
   statut_id SERIAL PRIMARY KEY,
   description VARCHAR NOT NULL,
-  previ_id INT NOT NULL,
-  FOREIGN KEY (previ_id) REFERENCES Previlege(previ_id)
+  privi_id INT,
+  FOREIGN KEY (privi_id) REFERENCES Privilege(privi_id)
 );
 
 CREATE TABLE Campus
@@ -35,20 +35,18 @@ CREATE TABLE Campus
 
 CREATE TABLE Pavillon
 (
-  pav_id CHAR(3) NOT NULL,
+  pav_id CHAR(3) PRIMARY KEY ,
   nom VARCHAR NOT NULL,
   camp_id INT NOT NULL,
   fac_id INT,
-  PRIMARY KEY (pav_id),
   FOREIGN KEY (camp_id) REFERENCES Campus(camp_id),
   FOREIGN KEY (fac_id) REFERENCES Faculte(fac_id)
 );
 
 CREATE TABLE Fonction
 (
-  fonc_id CHAR(4) NOT NULL,
-  description VARCHAR NOT NULL,
-  PRIMARY KEY (fonc_id)
+  fonc_id CHAR(4) PRIMARY KEY ,
+  description VARCHAR NOT NULL
 );
 
 CREATE TABLE Caracteristique
@@ -60,17 +58,14 @@ CREATE TABLE Caracteristique
 CREATE TABLE Categorie
 (
   cat_id SERIAL PRIMARY KEY,
-  description VARCHAR NOT NULL,
-  previ_id INT NOT NULL,
-  FOREIGN KEY (previ_id) REFERENCES Previlege(previ_id)
+  description VARCHAR NOT NULL
 );
 
 CREATE TABLE Membre
 (
-  cip CHAR(8) NOT NULL,
+  cip CHAR(8) PRIMARY KEY ,
   statut_id INT NOT NULL,
   dep_id INT NOT NULL,
-  PRIMARY KEY (cip),
   FOREIGN KEY (statut_id) REFERENCES Statut(statut_id),
   FOREIGN KEY (dep_id) REFERENCES Departement(dep_id)
 );
@@ -98,6 +93,7 @@ CREATE TABLE RelationsCaracteristique
 
 CREATE TABLE Reservation
 (
+  res_id SERIAL PRIMARY KEY,
   debut DATE NOT NULL,
   fin DATE NOT NULL,
   commentaire VARCHAR,
