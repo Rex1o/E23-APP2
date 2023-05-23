@@ -27,20 +27,33 @@ BEGIN
                    WHEN res.commentaire is null THEN
                        (
                            --Verification Local parent
-                           SELECT reserv.commentaire
-                           FROM reservation as reserv
+                           SELECT parent.commentaire
+                           FROM reservation as parent
                                     INNER JOIN
                                 (SELECT local.id_local_parent, local.id_pav_parent
                                  FROM local
                                  WHERE local.pav_id = loc.pav_id
                                    AND local.numero_local = loc.numero_local) as local_voulue
-                                ON reserv.numero_local = local_voulue.id_local_parent
-                                    AND reserv.pav_id = local_voulue.id_pav_parent
-                                    and dates.number >= reserv.debut
-                                    and dates.number <= reserv.fin)
+                                ON parent.numero_local = local_voulue.id_local_parent
+                                    AND parent.pav_id = local_voulue.id_pav_parent
+                                    and dates.number >= parent.debut
+                                    and dates.number <= parent.fin
+                           UNION ALL
+                           SELECT 'enfant réservé'
+                           FROM reservation as enfants
+                                    INNER JOIN
+                                (SELECT local.numero_local, local.pav_id
+                                 FROM local
+                                 WHERE local.id_pav_parent = loc.pav_id
+                                   AND local.id_local_parent = loc.numero_local) as local_voulue
+                                ON enfants.numero_local = local_voulue.numero_local
+                                    AND enfants.pav_id = local_voulue.pav_id
+                                    AND dates.number >= enfants.debut
+                                    AND dates.number <= enfants.fin
+                                LIMIT 1
+                           )
                    ELSE res.commentaire
                    END as commentaire
-
         FROM local AS loc
                  CROSS JOIN (SELECT *
                              from generate_series(
