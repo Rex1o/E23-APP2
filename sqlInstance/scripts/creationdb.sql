@@ -98,8 +98,8 @@ CREATE TABLE RelationsCaracteristique
 CREATE TABLE Reservation
 (
   res_id SERIAL PRIMARY KEY,
-  debut DATE NOT NULL,
-  fin DATE NOT NULL,
+  debut TIMESTAMP NOT NULL,
+  fin TIMESTAMP NOT NULL,
   commentaire VARCHAR,
   cip CHAR(8) NOT NULL,
   numero_local INT NOT NULL,
