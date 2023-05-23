@@ -1,4 +1,4 @@
-CREATE function
+CREATE OR REPLACE function
     TABLEAU(
     _debut TIMESTAMP,
      _fin TIMESTAMP,
@@ -19,27 +19,19 @@ BEGIN
     _interval := _fin - _debut;
     _rowAmount :=  (SELECT TRUNC(EXTRACT(EPOCH FROM _interval::INTERVAL)/60) / 15);
 RETURN QUERY
-    SELECT dates.number, loc.numero_local, loc.pav_id,
-           (
-           SELECT first_value(res.commentaire) over ()
-           FROM reservation as res
-              WHERE dates.number >= res.debut
-                AND dates.number <= res.fin
-                AND loc.numero_local = res.numero_local
-                AND loc.pav_id = res.pav_id
-               ) commentaire
+    SELECT dates.number, loc.numero_local, loc.pav_id, res.commentaire
     FROM local AS loc
         CROSS JOIN (
     SELECT * from generate_series(
             _debut,_fin,
             INTERVAL '15 minutes'
         ) AS number) AS dates
-    WHERE loc.cat_id = _categorie;
+    FULL OUTER JOIN reservation res on res.pav_id = loc.pav_id
+                            and loc.numero_local = res.numero_local
+                            and dates.number >= res.debut
+                            and dates.number <= res.fin
+    WHERE loc.cat_id = _categorie
+    ORDER BY  dates.number, res.numero_local;
 END$$;
-
-SELECT *
-FROM local
-         Cross join (SELECT generate_series(0, 6)) as locals
-WHERE local.cat_id = 6;
 
 SELECT * FROM TABLEAU(make_timestamp(2023, 5, 23, 8, 30, 0),make_timestamp(2023, 5, 23, 14, 30, 0),7);

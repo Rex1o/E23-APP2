@@ -163,12 +163,12 @@ VALUES ('hluv5927', 4, 8)
 INSERT INTO Local(numero_local, cat_id, pav_id, fonc_id, id_local_parent, id_pav_parent)
 VALUES
 (3007, 7, 'C1', '0372', NULL, NULL)
-,(4008, 7, 'C1', '0372', NULL, NULL)
+,(4008, 3, 'C1', '0372', NULL, NULL)
 ,(4016, 7, 'C1', '0372', NULL, NULL)
 ,(4023, 7, 'C1', '0372', NULL, NULL)
-,(5001, 7, 'C1', '0372', NULL, NULL)
+,(5001, 4, 'C1', '0372', NULL, NULL)
 ,(5006, 7, 'C1', '0372', NULL, NULL)
-,(3016, 7, 'D7', '0372', NULL, NULL);
+,(3016, 1, 'D7', '0372', NULL, NULL);
 
 INSERT INTO reservation(debut, fin, commentaire, cip, numero_local, pav_id)
 VALUES
