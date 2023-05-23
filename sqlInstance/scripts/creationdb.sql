@@ -76,6 +76,9 @@ CREATE TABLE Local
   cat_id INT NOT NULL,
   pav_id CHAR(3) NOT NULL,
   fonc_id CHAR(4) NOT NULL,
+  id_local_parent INT,
+  id_pav_parent CHAR(3),
+  FOREIGN KEY (id_local_parent, id_pav_parent) REFERENCES Local(numero_local, pav_id),
   FOREIGN KEY (cat_id) REFERENCES Categorie(cat_id),
   FOREIGN KEY (pav_id) REFERENCES Pavillon(pav_id),
   FOREIGN KEY (fonc_id) REFERENCES Fonction(fonc_id),
@@ -87,6 +90,7 @@ CREATE TABLE RelationsCaracteristique
   carac_id INT NOT NULL,
   numero_local INT NOT NULL,
   pav_id CHAR(3) NOT NULL,
+  qte INT NOT NULL,
   FOREIGN KEY (carac_id) REFERENCES Caracteristique(carac_id),
   FOREIGN KEY (pav_id, numero_local) REFERENCES Local(pav_id, numero_local)
 );
