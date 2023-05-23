@@ -21,9 +21,12 @@ BEGIN
 RETURN QUERY
     SELECT dates.number, loc.numero_local, loc.pav_id,
            (
-           SELECT res.commentaire
+           SELECT first_value(res.commentaire) over ()
            FROM reservation as res
-              WHERE dates.number >= res.debut AND dates.number <= res.fin
+              WHERE dates.number >= res.debut
+                AND dates.number <= res.fin
+                AND loc.numero_local = res.numero_local
+                AND loc.pav_id = res.pav_id
                ) commentaire
     FROM local AS loc
         CROSS JOIN (
@@ -39,4 +42,4 @@ FROM local
          Cross join (SELECT generate_series(0, 6)) as locals
 WHERE local.cat_id = 6;
 
-SELECT * FROM TABLEAU(make_timestamp(1997,6,4,14,55,0),make_timestamp(1997,6,4,18,55,0),6);
+SELECT * FROM TABLEAU(make_timestamp(2023, 5, 23, 8, 30, 0),make_timestamp(2023, 5, 23, 14, 30, 0),7);
